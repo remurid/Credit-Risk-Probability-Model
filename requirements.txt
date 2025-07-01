@@ -6,3 +6,6 @@ numpy
 matplotlib
 seaborn
 plotly
+scikit-learn
+xverse 
+woe
