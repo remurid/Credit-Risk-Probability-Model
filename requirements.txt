@@ -11,3 +11,8 @@ xverse
 woe
 mlflow
 pytest
+fastapi 
+uvicorn 
+pydantic
+flake8 
+black 
