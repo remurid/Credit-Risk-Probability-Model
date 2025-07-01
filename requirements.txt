@@ -1,1 +1,8 @@
 # Add your project dependencies here
+
+# EDA and data science libraries
+pandas
+numpy
+matplotlib
+seaborn
+plotly
