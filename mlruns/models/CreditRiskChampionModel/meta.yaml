@@ -1,8 +1,8 @@
 aliases:
-  champion: '2'
+  champion: '4'
 creation_timestamp: 1751372305619
 deployment_job_id: null
 deployment_job_state: null
 description: null
-last_updated_timestamp: 1751378923116
+last_updated_timestamp: 1751381303978
 name: CreditRiskChampionModel

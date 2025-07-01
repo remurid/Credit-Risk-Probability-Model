@@ -6,7 +6,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score
-
+from sklearn.pipeline import Pipeline
+from mlflow import MlflowClient
 # Import our custom modules
 from data_processing import build_feature_engineering_pipeline
 from target_engineering import create_target_variable
@@ -61,18 +62,10 @@ def train_and_evaluate():
         X, y, test_size=0.2, random_state=42, stratify=y
     )
 
-    # --- 3. Apply Feature Engineering Pipeline ---
+    # --- 3. Build Full Pipeline (Feature Engineering + Model) ---
     feature_pipeline = build_feature_engineering_pipeline()
 
-    print("Applying feature engineering pipeline to training data...")
-    X_train_processed = feature_pipeline.fit_transform(X_train)
-    
-    print("Applying feature engineering pipeline to testing data...")
-    X_test_processed = feature_pipeline.transform(X_test)
-
     # --- 4. Model Selection and Training ---
-    # Define the models you want to train.
-    # To add/remove models, just edit this dictionary.
     models = {
         "LogisticRegression": LogisticRegression(random_state=42, max_iter=1000),
         "GradientBoosting": GradientBoostingClassifier(random_state=42)
@@ -80,22 +73,25 @@ def train_and_evaluate():
 
     best_roc_auc = -1
     best_run_id = None
+    best_model_name = None
 
-    for model_name, model in models.items():
-        # Start a new MLflow run for each model.
+    for model_name, estimator in models.items():
+        # Build a full pipeline: feature engineering + estimator
+        full_pipeline = Pipeline([
+            ("features", feature_pipeline),
+            ("estimator", estimator)
+        ])
+
         with mlflow.start_run() as run:
             print(f"\n--- Training {model_name} ---")
-            
-            # Log model type as a parameter
             mlflow.log_param("model_type", model_name)
 
-            # Train the model
-            model.fit(X_train_processed, y_train)
+            # Fit the full pipeline
+            full_pipeline.fit(X_train, y_train)
 
-            # --- 5. Model Evaluation ---
-            # Make predictions on the test set
-            y_pred = model.predict(X_test_processed)
-            y_prob = model.predict_proba(X_test_processed)[:, 1] # Probability of the positive class
+            # Predict on test set
+            y_pred = full_pipeline.predict(X_test)
+            y_prob = full_pipeline.predict_proba(X_test)[:, 1]
 
             # Calculate metrics
             metrics = evaluate_model(y_test, y_pred, y_prob)
@@ -103,28 +99,35 @@ def train_and_evaluate():
             print(f"Metrics for {model_name}:")
             for metric, value in metrics.items():
                 print(f"  {metric}: {value:.4f}")
-            
-            # Log metrics to MLflow
+
             mlflow.log_metrics(metrics)
-            
-            # Log the trained model to MLflow
-            mlflow.sklearn.log_model(model, artifact_path=model_name)
-            
-            # Check if this is the best model so far
+
+            # Log the full pipeline (feature engineering + model)
+            #mlflow.sklearn.log_model(full_pipeline, artifact_path=model_name)
+            mlflow.sklearn.log_model(
+                full_pipeline,
+                artifact_path=model_name,
+                code_paths=["src/utils/data_processing.py", "src/utils/target_engineering.py"]
+            )
+
             if metrics["roc_auc"] > best_roc_auc:
                 best_roc_auc = metrics["roc_auc"]
                 best_run_id = run.info.run_id
+                best_model_name = model_name
                 print(f"New best model found: {model_name} with ROC-AUC: {best_roc_auc:.4f}")
 
-    # --- 6. Register the Best Model ---
-    if best_run_id:
+    # --- 5. Register the Best Model ---
+    if best_run_id and best_model_name:
         print(f"\nRegistering the best model from run ID: {best_run_id}")
-        # Construct the model URI from the best run
-        model_uri = f"runs:/{best_run_id}/GradientBoosting" # Assuming GBM will be best
-        
-        # Register the model in the MLflow Model Registry
+        model_uri = f"runs:/{best_run_id}/{best_model_name}"
         mlflow.register_model(model_uri=model_uri, name="CreditRiskChampionModel")
         print("Model registered successfully!")
+
+        
+        client = MlflowClient()
+        # Set the "champion" alias to the latest version of the registered model
+        latest_version = client.get_latest_versions("CreditRiskChampionModel", stages=["None"])[0].version
+        client.set_registered_model_alias("CreditRiskChampionModel", "champion", latest_version)
 
 if __name__ == '__main__':
     train_and_evaluate()

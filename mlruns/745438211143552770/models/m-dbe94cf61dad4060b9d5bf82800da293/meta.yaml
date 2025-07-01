@@ -1,0 +1,11 @@
+artifact_location: file:D:/Personal Projects/TENx/Week5/code/Credit Risk Probability
+  Model/mlruns/745438211143552770/models/m-dbe94cf61dad4060b9d5bf82800da293/artifacts
+creation_timestamp: 1751380568315
+experiment_id: '745438211143552770'
+last_updated_timestamp: 1751380576094
+model_id: m-dbe94cf61dad4060b9d5bf82800da293
+model_type: null
+name: LogisticRegression
+source_run_id: 3096e665a0f14e3cba99fcca3b12352f
+status: 2
+status_message: null

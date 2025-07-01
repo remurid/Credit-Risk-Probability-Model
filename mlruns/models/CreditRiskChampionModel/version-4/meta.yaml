@@ -1,0 +1,19 @@
+aliases: []
+creation_timestamp: 1751381303852
+current_stage: None
+deployment_job_state: null
+description: null
+last_updated_timestamp: 1751381303852
+metrics: null
+model_id: m-912cef5247644f3c8ba7d52fd52e5d54
+name: CreditRiskChampionModel
+params: null
+run_id: 2c83f17141d64030b6e2b3829a2bd411
+run_link: null
+source: models:/m-912cef5247644f3c8ba7d52fd52e5d54
+status: READY
+status_message: null
+storage_location: file:D:/Personal Projects/TENx/Week5/code/Credit Risk Probability
+  Model/mlruns/745438211143552770/models/m-912cef5247644f3c8ba7d52fd52e5d54/artifacts
+user_id: null
+version: 4
