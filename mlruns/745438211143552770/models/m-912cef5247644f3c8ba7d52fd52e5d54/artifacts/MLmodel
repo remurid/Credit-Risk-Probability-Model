@@ -1,0 +1,23 @@
+artifact_path: file:D:/Personal Projects/TENx/Week5/code/Credit Risk Probability Model/mlruns/745438211143552770/models/m-912cef5247644f3c8ba7d52fd52e5d54/artifacts
+flavors:
+  python_function:
+    code: code
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.13.5
+  sklearn:
+    code: code
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.7.0
+mlflow_version: 3.1.1
+model_id: m-912cef5247644f3c8ba7d52fd52e5d54
+model_size_bytes: 166074
+model_uuid: m-912cef5247644f3c8ba7d52fd52e5d54
+prompts: null
+run_id: 2c83f17141d64030b6e2b3829a2bd411
+utc_time_created: '2025-07-01 14:48:19.665090'

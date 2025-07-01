@@ -1,0 +1,14 @@
+artifact_uri: file:D:/Personal Projects/TENx/Week5/code/Credit Risk Probability Model/mlruns/745438211143552770/3096e665a0f14e3cba99fcca3b12352f/artifacts
+end_time: 1751380576125
+entry_point_name: ''
+experiment_id: '745438211143552770'
+lifecycle_stage: active
+run_id: 3096e665a0f14e3cba99fcca3b12352f
+run_name: clean-kite-513
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1751380565829
+status: 3
+tags: []
+user_id: DAFtech
