@@ -1,0 +1,14 @@
+artifact_uri: file:D:/Personal Projects/TENx/Week5/code/Credit Risk Probability Model/mlruns/745438211143552770/1a8f0aed25c245baaa9d12791d6b837b/artifacts
+end_time: 1751372305588
+entry_point_name: ''
+experiment_id: '745438211143552770'
+lifecycle_stage: active
+run_id: 1a8f0aed25c245baaa9d12791d6b837b
+run_name: spiffy-hound-316
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1751372240218
+status: 3
+tags: []
+user_id: DAFtech

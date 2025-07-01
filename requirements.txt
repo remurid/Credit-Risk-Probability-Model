@@ -9,3 +9,5 @@ plotly
 scikit-learn
 xverse 
 woe
+mlflow
+pytest

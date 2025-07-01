@@ -1,0 +1,14 @@
+artifact_uri: file:D:/Personal Projects/TENx/Week5/code/Credit Risk Probability Model/mlruns/745438211143552770/08efdd746c834e8d83edb5727e1d69ca/artifacts
+end_time: 1751372240205
+entry_point_name: ''
+experiment_id: '745438211143552770'
+lifecycle_stage: active
+run_id: 08efdd746c834e8d83edb5727e1d69ca
+run_name: clean-bear-20
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1751372225338
+status: 3
+tags: []
+user_id: DAFtech

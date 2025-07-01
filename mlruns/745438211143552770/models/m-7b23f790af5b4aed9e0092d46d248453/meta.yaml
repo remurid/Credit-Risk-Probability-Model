@@ -1,0 +1,11 @@
+artifact_location: file:D:/Personal Projects/TENx/Week5/code/Credit Risk Probability
+  Model/mlruns/745438211143552770/models/m-7b23f790af5b4aed9e0092d46d248453/artifacts
+creation_timestamp: 1751372297898
+experiment_id: '745438211143552770'
+last_updated_timestamp: 1751372305559
+model_id: m-7b23f790af5b4aed9e0092d46d248453
+model_type: null
+name: GradientBoosting
+source_run_id: 1a8f0aed25c245baaa9d12791d6b837b
+status: 2
+status_message: null
